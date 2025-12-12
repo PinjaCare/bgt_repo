@@ -1,0 +1,23 @@
+# Byte-compiled
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# SQLite database (optional: voit seurata sitä tai ignoorata)
+database.db
+
+# IDE settings
+.idea/
+*.iml
+
+# Flask cache
+instance/
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db

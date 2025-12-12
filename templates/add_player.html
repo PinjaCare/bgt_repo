@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>Add player</title>
+{% endblock %}
+
+{% block body %}
+<h1>Add a new board game enthusiast</h1>
+
+<form method="POST">
+
+    <label for="player_name">Player name</label> <!--label for input field with the given id -->
+    <input type="text" id="player_name" name="player_name" required>
+
+    <button type="submit">Save</button>
+</form>
+
+<a href="/players">View all players</a> <!-- When clicked, browser requests given route (/players) and Flask runs the players() route-->
+{% endblock %}
