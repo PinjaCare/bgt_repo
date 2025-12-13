@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block head %}
+<title>Edit game</title>
+{% endblock %}
+
+{% block body %}
+<h1>Edit game</h1>
+
+<form method="POST">
+
+    <label for="game_name">Name</label> <!--label for input field with the given id -->
+    <input type="text" id="game_name" name="game_name" value="{{ game.name }}" required>
+
+    <label for="genre">Genre</label>
+     <select id="genre" name="genre" required>
+
+        <option value="Strategy"   {% if game.genre == "Strategy" %}selected{% endif %}>Strategy</option>
+        <option value="Cooperative" {% if game.genre == "Cooperative" %}selected{% endif %}>Cooperative</option>
+        <option value="Party"       {% if game.genre == "Party" %}selected{% endif %}>Party</option>
+        <option value="Card Game"   {% if game.genre == "Card Game" %}selected{% endif %}>Card Game</option>
+        <option value="Family"      {% if game.genre == "Family" %}selected{% endif %}>Family</option>
+        <option value="Abstract"    {% if game.genre == "Abstract" %}selected{% endif %}>Abstract</option>
+        <option value="Thematic"    {% if game.genre == "Thematic" %}selected{% endif %}>Thematic</option>
+        <option value="Eurogame"    {% if game.genre == "Eurogame" %}selected{% endif %}>Eurogame</option>
+
+    </select>
+
+    <label for="rating">Rating (BGG)</label>
+    <input type="number" min="0" id="rating" name="rating" value="{{ game.rating }}" required>
+
+    <label for="min_players">Minimum of players</label>
+    <input type="number" min="0" id="min_players" name="min_players" value="{{ game.min_players }}" required>
+
+    <label for="max_players">Maximum of players</label>
+    <input type="number" min="0" id="max_players" name="max_players" value="{{ game.max_players }}" required>
+
+    <button type="submit">Save changes</button>
+</form>
+
+<form action="/delete_game/{{ game.id }}" method="POST" onsubmit="return confirm('Are you sure you want to delete {{ game.name }}?');">
+    <button type="submit">Delete game</button>
+</form>
+
+<a href="/games">Cancel</a> <!-- When clicked, browser requests given route (/players) and Flask runs the players() route-->
+{% endblock %}

@@ -13,7 +13,17 @@
     <input type="text" id="game_name" name="game_name" required>
 
     <label for="genre">Genre</label>
-    <input type="text" id="genre" name="genre" required>
+    <select id="genre" name="genre" required>
+        <option value="">Select genre</option>
+        <option value="Strategy">Strategy</option>
+        <option value="Cooperative">Cooperative</option>
+        <option value="Party">Party</option>
+        <option value="Card Game">Card Game</option>
+        <option value="Family">Family</option>
+        <option value="Abstract">Abstract</option>
+        <option value="Thematic">Thematic</option>
+        <option value="Eurogame">Eurogame</option>
+    </select>
 
     <label for="rating">Rating (According to BGG)</label>
     <input type="number" id="rating" name="rating" required>
@@ -23,9 +33,6 @@
 
     <label for="max_players">Maximum of players</label>
     <input type="number" min="0" id="max_players" name="max_players" required>
-
-    <label for="last_updated">Last updated</label>
-    <input type="text" id="last_updated" name="last_updated" required>
 
     <button type="submit">Save</button>
 </form>

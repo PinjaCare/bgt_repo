@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, Response
 from database import get_db_connection
 from models.game import Game
+from datetime import datetime
 
 games_controller = Blueprint("games_controller", __name__)
 
@@ -22,10 +23,10 @@ def add_game():
         # Saving new game's info to database if request method was POST
         name = request.form["game_name"]
         genre = request.form["genre"]
-        rating = request.form["rating"]
+        rating = float(request.form["rating"])
         min_players = request.form["min_players"]
         max_players = request.form["max_players"]
-        last_updated = request.form["last_updated"]
+        last_updated = datetime.today().strftime("%Y-%m-%d")
         connection = get_db_connection()
         connection.execute(
             "INSERT INTO games (name, genre, rating, min_players, max_players, last_updated) VALUES (?,?,?,?,?,?)",
@@ -47,17 +48,17 @@ def delete_game(id):
     connection.close()
     return redirect("/games")
 
-# Route for editing player
-@games_controller.route("/edit_player/<int:id>", methods=["GET","POST"])
+# Route for editing game
+@games_controller.route("/edit_game/<int:id>", methods=["GET","POST"])
 def edit_game(id):
     connection = get_db_connection()
     if request.method == "POST": # Editing data in the database if request method was POST
         name = request.form["game_name"]
         genre = request.form["genre"]
-        rating = request.form["rating"]
+        rating = float(request.form["rating"])
         min_players = request.form["min_players"]
         max_players = request.form["max_players"]
-        last_updated = request.form["last_updated"]
+        last_updated = datetime.today().strftime("%Y-%m-%d")
         connection.execute("UPDATE games SET name = ?, genre = ?, rating = ?, min_players = ?, max_players = ?, last_updated = ? WHERE id = ?",
                            (name, genre, rating, min_players, max_players, last_updated, id))
         connection.commit()
@@ -69,4 +70,4 @@ def edit_game(id):
     if game_to_be_edited is None: # Checks if the game was found
         return Response("Game not found", status=404) # This status code indicates that server cannot find the requested resource, that is when the selected game didn't exist.
     game_object = Game(game_to_be_edited) # Game was found and this changes the fetched data to a game object
-    return render_template("edit_game.html", player = game_object) # Selected player exists and will be forwarded to view
+    return render_template("edit_game.html", game = game_object) # Game is forwarded to view
