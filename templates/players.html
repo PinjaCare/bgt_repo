@@ -13,6 +13,7 @@
         <th>Wins</th>
         <th>Ranking</th>
         <th></th>
+        <th></th>
     </tr>
 
     {% for player in players %}
@@ -21,7 +22,11 @@
         <td>{{ player.games_played }}</td>
         <td>{{ player.wins }}</td>
         <td>{{ player.ranking }}</td>
-        <td><a href="/delete_player/{{ player.id }}" onclick="return confirm('Are you sure you want to delete this player?')" >Delete</a></td> <!-- The onclick handler runs before the browser follows the href. If confirm() returns false, the deletion is cancelled. If it returns true, the browser proceeds with the delete operation.-->
+        <td><a href="/edit_player/{{ player.id }}" >Edit</a></td>
+        <td><form action="/delete_player/{{ player.id }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this player?');">
+            <button type="submit">Delete player</button>
+        </form> <!-- The onsubmit handler runs before the browser follows the href. If confirm() returns false, the deletion is cancelled. If it returns true, the browser proceeds with the delete operation.-->
+        </td>
     </tr>
     {% endfor %}
 </table>

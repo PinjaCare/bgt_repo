@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block head %}
+<title>Edit player</title>
+{% endblock %}
+
+{% block body %}
+<h1>Edit a player</h1>
+
+<form method="POST">
+
+    <label for="player_name">Player name</label> <!--label for input field with the given id -->
+    <input type="text" id="player_name" name="player_name" value="{{ player.name }}" required>
+
+    <label for="games_played">Games played</label>
+    <input type="number" min="0" id="games_played" name="games_played" value="{{ player.games_played }}" required>
+
+    <label for="wins">Wins</label>
+    <input type="number" min="0" id="wins" name="wins" value="{{ player.wins }}" required>
+
+    <button type="submit">Save changes</button>
+</form>
+
+<form action="/delete_player/{{ player.id }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this player?');">
+    <button type="submit">Delete player</button>
+</form>
+
+<a href="/players">Cancel</a> <!-- When clicked, browser requests given route (/players) and Flask runs the players() route-->
+{% endblock %}
