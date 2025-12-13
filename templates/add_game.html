@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>Add game</title>
+{% endblock %}
+
+{% block body %}
+<h1>Add new game</h1>
+
+<form method="POST">
+
+    <label for="game_name">Name</label>
+    <input type="text" id="game_name" name="game_name" required>
+
+    <label for="genre">Genre</label>
+    <input type="text" id="genre" name="genre" required>
+
+    <label for="rating">Rating (According to BGG)</label>
+    <input type="number" id="rating" name="rating" required>
+
+    <label for="min_players">Minimum of players</label>
+    <input type="number" min="0" id="min_players" name="min_players" required>
+
+    <label for="max_players">Maximum of players</label>
+    <input type="number" min="0" id="max_players" name="max_players" required>
+
+    <label for="last_updated">Last updated</label>
+    <input type="text" id="last_updated" name="last_updated" required>
+
+    <button type="submit">Save</button>
+</form>
+
+<a href="/games">Back</a>
+{% endblock %}

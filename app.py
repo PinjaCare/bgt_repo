@@ -1,10 +1,12 @@
 # Imports
 from flask import Flask, render_template
 from controllers.player_controller import player_controller
+from controllers.games_controller import games_controller
 
 # App. Creates an instance of flask-app object
 flaskApp = Flask(__name__) # Handles HTTP-requests
 flaskApp.register_blueprint(player_controller)
+flaskApp.register_blueprint(games_controller)
 
 # Route for index
 @flaskApp.route("/")
