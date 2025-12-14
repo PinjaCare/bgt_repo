@@ -12,8 +12,12 @@ def get_players():
     connection.close()
 
     player_list = [Player(row) for row in players_from_db]
+    # Filtering order
+    order = request.args.get("order","desc")
+    # Sorting players by ranking with given order
+    player_list_sorted = sorted(player_list, key=lambda p:p.ranking, reverse=( order == "desc" ))
 
-    return render_template("players.html", players=player_list)
+    return render_template("players.html", players = player_list_sorted, selected_order = order)
 
 
 # Route for adding player

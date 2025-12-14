@@ -5,71 +5,108 @@
 {% endblock %}
 
 {% block body %}
-<h1>Game sessions</h1>
 
-<form method="get" action="/sessions" class="mb-3">
-    <label for="player_id">Filter by player:</label>
-    <select name="player_id" id="player_id">
-        <option value="">All players</option>
-        {% for player in players %}
+<div class="sessions-header mb-4">
+
+    <h1 class="mb-0">Game sessions</h1>
+
+    <a href="/add_session" class="btn btn-primary">
+        <i class="bi bi-plus-circle-fill"></i>
+        New session
+    </a>
+
+</div>
+
+<form method="get" action="/sessions" class="sessions-filter mb-4">
+    <label for="player_id">Filter by player</label>
+
+    <div class="sessions-filter-controls">
+        <select name="player_id" id="player_id" class="form-select">
+            <option value="">All players</option>
+            {% for player in players %}
             <option value="{{ player.id }}"
                 {% if selected_player == player.id|string %}selected{% endif %}>
                 {{ player.name }}
             </option>
-        {% endfor %}
-    </select>
-    <button type="submit">Filter</button>
+            {% endfor %}
+        </select>
+
+        <button type="submit" class="btn btn-outline-secondary">
+            Filter
+        </button>
+    </div>
 </form>
 
-<table class="table table-striped table-hover table-bordered align-middle">
-    <tr>
-        <th>Game</th>
-        <th>Participants</th>
-        <th>Winner(s)</th>
-        <th>Duration</th>
-        <th>Date</th>
-        <th></th>
-    </tr>
+<div class="session-list">
 
     {% for s in sessions %}
-    <tr>
-        <td>{{ s.game_name }}</td>
 
-        <td>
-            {% if s.participants %} <!-- Checks if participants list is empty or not, that is, returns true when not and false when is -->
-                {{ ", ".join(s.participants) }} <!-- if returned true: lists participants separated by commas -->
-            {% else %}
-                -
-            {% endif %}
-        </td>
+    <div class="session-card">
 
-        <td>
-            {% if s.winners %}
-                {{ ", ".join(s.winners) }}
-            {% else %}
-                -
-            {% endif %}
-        </td>
+        <!-- LEFT: Game + date -->
+        <div class="session-main">
+            <div class="session-game">
+                <i class="bi bi-dice-5-fill"></i>
+                {{ s.game_name }}
+            </div>
+            <div class="session-date">
+                <i class="bi bi-calendar-event"></i>
+                {{ s.date_played }}
+            </div>
+        </div>
 
-        <td>
-            {% if s.duration_minutes %}
-                {{ s.duration_minutes }} min
-            {% else %}
-                -
-            {% endif %}
-        </td>
+        <!-- MIDDLE: players -->
+        <div class="session-info">
 
-        <td>{{ s.date_played }}</td>
+            <div class="session-row">
+                <i class="bi bi-people-fill"></i>
+                <span>
+                    {% if s.participants %}
+                        {{ ", ".join(s.participants) }}
+                    {% else %}
+                        –
+                    {% endif %}
+                </span>
+            </div>
 
-        <td>
-            <form action="/delete_session/{{ s.id }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this session?');">
-                <button type="submit">Delete</button>
+            <div class="session-row winner">
+                <i class="bi bi-trophy-fill"></i>
+                <span>
+                    {% if s.winners %}
+                        {{ ", ".join(s.winners) }}
+                    {% else %}
+                        –
+                    {% endif %}
+                </span>
+            </div>
+
+        </div>
+
+        <!-- RIGHT: meta + actions -->
+        <div class="session-meta">
+
+            <div class="session-duration">
+                <i class="bi bi-clock-fill"></i>
+                {% if s.duration_minutes %}
+                    {{ s.duration_minutes }} min
+                {% else %}
+                    –
+                {% endif %}
+            </div>
+
+            <form action="/delete_session/{{ s.id }}" method="POST"
+                  onsubmit="return confirm('Delete this session?');">
+                <button type="submit" class="btn btn-sm btn-outline-danger">
+                    Delete
+                </button>
             </form>
-        </td>
 
-    </tr>
+        </div>
+
+    </div>
+
     {% endfor %}
 
-</table>
-<a href="/add_session">Add new session</a>
+</div>
+
 {% endblock %}

@@ -12,16 +12,67 @@
     <input type="text" id="game_name" name="game_name" value="{{ game.name }}" required>
 
     <label for="genre">Genre</label>
-     <select id="genre" name="genre" required>
+    <select id="genre" name="genre" required>
 
-        <option value="Strategy"   {% if game.genre == "Strategy" %}selected{% endif %}>Strategy</option>
-        <option value="Cooperative" {% if game.genre == "Cooperative" %}selected{% endif %}>Cooperative</option>
-        <option value="Party"       {% if game.genre == "Party" %}selected{% endif %}>Party</option>
-        <option value="Card Game"   {% if game.genre == "Card Game" %}selected{% endif %}>Card Game</option>
-        <option value="Family"      {% if game.genre == "Family" %}selected{% endif %}>Family</option>
-        <option value="Abstract"    {% if game.genre == "Abstract" %}selected{% endif %}>Abstract</option>
-        <option value="Thematic"    {% if game.genre == "Thematic" %}selected{% endif %}>Thematic</option>
-        <option value="Eurogame"    {% if game.genre == "Eurogame" %}selected{% endif %}>Eurogame</option>
+        <option value="Strategy"
+            {% if game.genre == "Strategy" %}selected{% endif %}>
+            Strategy
+        </option>
+
+        <option value="Cooperative"
+            {% if game.genre == "Cooperative" %}selected{% endif %}>
+            Cooperative
+        </option>
+
+        <option value="Party"
+            {% if game.genre == "Party" %}selected{% endif %}>
+            Party
+        </option>
+
+        <option value="Card Game"
+            {% if game.genre == "Card Game" %}selected{% endif %}>
+            Card Game
+        </option>
+
+        <option value="Family"
+            {% if game.genre == "Family" %}selected{% endif %}>
+            Family
+        </option>
+
+        <option value="Abstract Strategy"
+            {% if game.genre == "Abstract Strategy" %}selected{% endif %}>
+            Abstract Strategy
+        </option>
+
+        <option value="Thematic / Adventure"
+            {% if game.genre == "Thematic / Adventure" %}selected{% endif %}>
+            Thematic / Adventure
+        </option>
+
+        <option value="Social Deduction / Bluffing"
+            {% if game.genre == "Social Deduction / Bluffing" %}selected{% endif %}>
+            Social Deduction / Bluffing
+        </option>
+
+        <option value="Deck-building"
+            {% if game.genre == "Deck-building" %}selected{% endif %}>
+            Deck-building
+        </option>
+
+        <option value="Trivia"
+            {% if game.genre == "Trivia" %}selected{% endif %}>
+            Trivia
+        </option>
+
+        <option value="Educational"
+            {% if game.genre == "Educational" %}selected{% endif %}>
+            Educational
+        </option>
+
+        <option value="War/Conflict"
+            {% if game.genre == "War/Conflict" %}selected{% endif %}>
+            War/Conflict
+        </option>
 
     </select>
 

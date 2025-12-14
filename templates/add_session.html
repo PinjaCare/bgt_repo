@@ -5,35 +5,99 @@
 
 {% block body %}
 
-<form method="POST">
+<div class="add-session-wrapper">
 
-    <label for="game_id">Game</label><br>
-    <select id="game_id" name="game_id" required>
-        {% for g in games %}
-            <option value="{{ g.id }}">{{ g.name }}</option>
-        {% endfor %}
-    </select>
-    <br><br>
-    <label>Participants</label><br>
-    {% for p in players %}
-        <input type="checkbox" name="participants" value="{{ p.id }}">
-        {{ p.name }}
-    {% endfor %}
-    <br><br>
-    <label>Winners</label><br>
-    {% for p in players %}
-        <input type="checkbox" name="winners" value="{{ p.id }}">
-        {{ p.name }}
-    {% endfor %}
-    <br><br>
-    <label for="duration_minutes">Duration (minutes)</label><br>
-    <input type="number" min="1" id="duration_minutes" name="duration_minutes" required>
-    <br><br>
-    <label for="date_played">Date</label><br>
-    <input type="date" id="date_played" name="date_played" required>
-    <br><br>
-    <button type="submit">Save</button>
+    <h1 class="mb-4">New game session</h1>
 
-</form>
-<a href="/sessions">Cancel</a>
+    <form method="POST" class="add-session-card">
+
+        <!-- GAME -->
+        <div class="form-section">
+            <label class="section-label">
+                <i class="bi bi-dice-5-fill"></i>
+                Game
+            </label>
+
+            <select id="game_id" name="game_id" class="form-select" required>
+                {% for g in games %}
+                <option value="{{ g.id }}">{{ g.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- PARTICIPANTS -->
+        <div class="form-section">
+            <label class="section-label">
+                <i class="bi bi-people-fill"></i>
+                Participants
+            </label>
+
+            <div class="checkbox-grid">
+                {% for p in players %}
+                <label class="checkbox-card">
+                    <input type="checkbox" name="participants" value="{{ p.id }}">
+                    <span>{{ p.name }}</span>
+                </label>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- WINNERS -->
+        <div class="form-section">
+            <label class="section-label">
+                <i class="bi bi-trophy-fill"></i>
+                Winner(s)
+            </label>
+
+            <div class="checkbox-grid winners">
+                {% for p in players %}
+                <label class="checkbox-card">
+                    <input type="checkbox" name="winners" value="{{ p.id }}">
+                    <span>{{ p.name }}</span>
+                </label>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- META -->
+        <div class="form-section form-row">
+            <div>
+                <label class="section-label">
+                    <i class="bi bi-clock-fill"></i>
+                    Duration (minutes)
+                </label>
+                <input type="number"
+                       min="1"
+                       name="duration_minutes"
+                       class="form-control"
+                       required>
+            </div>
+
+            <div>
+                <label class="section-label">
+                    <i class="bi bi-calendar-event"></i>
+                    Date played
+                </label>
+                <input type="date"
+                       name="date_played"
+                       class="form-control"
+                       required>
+            </div>
+        </div>
+
+        <!-- ACTIONS -->
+        <div class="form-actions">
+            <a href="/sessions" class="btn btn-outline-secondary">
+                Cancel
+            </a>
+
+            <button type="submit" class="btn btn-primary">
+                Save session
+            </button>
+        </div>
+
+    </form>
+
+</div>
+
 {% endblock %}

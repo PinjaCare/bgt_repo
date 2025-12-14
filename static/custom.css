@@ -10,21 +10,7 @@ h1, h2, h3, .game-title, .navbar-brand {
     letter-spacing: 0.3px;
 }
 
-/* Navbar styling */
-.navbar {
-    background-color: #8CCF9F !important;
-}
-
-.navbar .nav-link,
-.navbar .navbar-brand {
-    color: #1C1C1C !important;
-}
-
-.navbar .nav-link:hover {
-    color: #3F3F3F !important;
-}
-
-/* Buttons */
+/************************** Buttons **************/
 .btn-primary {
     background-color: #2F6B3B !important;
     border-color: #2F6B3B !important;
@@ -35,6 +21,19 @@ h1, h2, h3, .game-title, .navbar-brand {
     border-color: #265c32 !important;
 }
 
+/*********************** NAVBAR *******************************/
+
+/* Navbar styling */
+
+.navbar .nav-link,
+.navbar .navbar-brand {
+    color: #1C1C1C !important;
+}
+
+.navbar .nav-link:hover {
+    color: #3F3F3F !important;
+}
+
 /* Navbar typography */
 .navbar,
 .navbar-brand,
@@ -43,11 +42,6 @@ h1, h2, h3, .game-title, .navbar-brand {
     font-family: 'Spectral', serif;
     letter-spacing: 0.4px;
     font-weight: 500;
-}
-
-/* Cards or table backgrounds*/
-.table {
-    background-color: #ffffffc7; /* soft white with slight transparency */
 }
 
 .navbar {
@@ -105,14 +99,14 @@ h1, h2, h3, .game-title, .navbar-brand {
     transform: translateY(2px);
     font-weight: 600;
 }
-
+/********************************************************/
 /* Keskittää kaiken sisällön sivun keskelle */
 .page-container {
     max-width: 900px;      /* leveys */
     margin: 40px auto;     /* keskitys */
     padding: 20px;
 }
-
+/********************************************************/
 /* Taulukon ulkoasun hienosäätö */
 .table {
     background-color: #ffffff;
@@ -121,12 +115,24 @@ h1, h2, h3, .game-title, .navbar-brand {
 }
 
 .table thead {
-    background-color: #8CCF9F !important;      /* vihreä yläotsikko */
+    background-color: #8CCF9F !important;
     color: #1C1C1C;
     font-size: 1.1rem;
 }
 
-/* GAME CARDS */
+/**************** GAMES HEADER ****************/
+
+.games-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.games-header h1 {
+    font-family: 'Spectral', serif;
+}
+
+/********************* GAME CARDS ****************/
 
 .game-card {
     background: linear-gradient(
@@ -220,4 +226,405 @@ h1, h2, h3, .game-title, .navbar-brand {
     display: flex;
     align-items: center;
     gap: 6px;
+}
+
+/***************************************** GENRE COLORS ***************************************/
+/* Base genre badge */
+.genre-badge {
+    font-family: 'Spectral', serif;
+    font-size: 0.8rem;
+    padding: 6px 14px;
+    border-radius: 20px;
+    letter-spacing: 0.3px;
+    display: inline-block;
+    margin-bottom: 6px;
+}
+
+/* ===== GENRES ===== */
+
+.genre-strategy {
+    background-color: #4A6F8A;
+    color: #ffffff;
+}
+
+.genre-cooperative {
+    background-color: #6B8E23;
+    color: #ffffff;
+}
+
+.genre-party {
+    background-color: #D97706;
+    color: #ffffff;
+}
+
+.genre-card-game {
+    background-color: #9333EA;
+    color: #ffffff;
+}
+
+.genre-family {
+    background-color: #6FB786;
+    color: #1C1C1C;
+}
+
+.genre-abstract-strategy {
+    background-color: #64748B;
+    color: #ffffff;
+}
+
+.genre-thematic--adventure {
+    background-color: #8B5E34;
+    color: #ffffff;
+}
+
+.genre-social-deduction--bluffing {
+    background-color: #7C2D12;
+    color: #ffffff;
+}
+
+.genre-deck-building {
+    background-color: #2563EB;
+    color: #ffffff;
+}
+
+.genre-trivia {
+    background-color: #0D9488;
+    color: #ffffff;
+}
+
+.genre-educational {
+    background-color: #84CC16;
+    color: #1C1C1C;
+}
+
+.genre-warconflict {
+    background-color: #991B1B;
+    color: #ffffff;
+}
+
+/* Fallback for unexpected genres */
+.genre-badge:not([class*="genre-"]) {
+    background-color: #8CCF9F;
+    color: #1C1C1C;
+}
+
+/********************** PLAYER CARDS *************************/
+
+.player-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.player-card {
+    background: linear-gradient(
+        135deg,
+        #E6D1A3,
+        #D6BC8A
+    );
+    border-radius: 14px;
+    padding: 16px 20px;
+    display: grid;
+    grid-template-columns: 1.5fr 2fr auto;
+    align-items: center;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+}
+
+/* Left */
+.player-main {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.player-name {
+    font-family: 'Spectral', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.player-ranking {
+    font-size: 0.9rem;
+    color: #2F6B3B;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Middle */
+.player-stats {
+    display: flex;
+    gap: 32px;
+}
+
+.player-stats div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+.player-stats strong {
+    font-size: 1.1rem;
+}
+
+.player-stats i {
+    color: #2F6B3B;
+    margin-bottom: 4px;
+}
+
+/* Right */
+.player-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.player-actions form {
+    margin: 0;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .player-card {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .player-actions {
+        justify-content: flex-start;
+    }
+}
+
+.players-sort {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.players-sort-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.players-sort-controls .form-select {
+    min-width: 220px;
+    width: auto;
+}
+
+@media (max-width: 768px) {
+    .players-sort-controls {
+        flex-wrap: wrap;
+    }
+}
+
+/*************************** PLAYER EDIT MODAL **************************************/
+/* MODAL – BoardGameTracker theme */
+
+.modal-content {
+    background-color: #FBF8F1; /* vaalea beige */
+    border-radius: 16px;
+    border: 2px solid #D6BC8A; /* puunsävyinen reunus */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+.modal-header {
+    background-color: #8CCF9F;
+    border-bottom: 2px solid #6FB786;
+    border-radius: 14px 14px 0 0;
+}
+
+.modal-title {
+    font-family: 'Spectral', serif;
+    font-weight: 600;
+    color: #1C1C1C;
+}
+
+.modal-header .btn-close {
+    filter: invert(0.2);
+}
+
+.modal-body label {
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.modal-body .form-control {
+    border-radius: 10px;
+    border: 1px solid #C9B48A;
+    padding: 10px 12px;
+}
+
+.modal-body .form-control:focus {
+    border-color: #6FB786;
+    box-shadow: 0 0 0 0.2rem rgba(111, 183, 134, 0.25);
+}
+
+.modal-footer {
+    border-top: 2px solid #E6D1A3;
+    padding-top: 12px;
+}
+
+.modal-footer .btn-primary {
+    background-color: #2F6B3B;
+    border-color: #2F6B3B;
+}
+
+.modal-footer .btn-primary:hover {
+    background-color: #265c32;
+}
+
+.modal-footer .btn-outline-secondary {
+    border-radius: 10px;
+}
+
+/* SESSIONS */
+
+.sessions-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sessions-filter label {
+    font-weight: 500;
+}
+
+.sessions-filter-controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.session-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/***************** SESSION CARD ****************/
+
+.session-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: #E6D1A3; /* puumainen sävy */
+    border-radius: 18px;
+    padding: 18px 22px;
+
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+.session-main {
+    min-width: 200px;
+}
+
+.session-game {
+    font-family: 'Spectral', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.session-date {
+    font-size: 0.9rem;
+    color: #3F3F3F;
+}
+
+.session-info {
+    flex: 1;
+    padding: 0 24px;
+}
+
+.session-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.session-row.winner {
+    font-weight: 600;
+    color: #2F6B3B;
+}
+
+.session-meta {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.session-duration {
+    font-weight: 500;
+}
+
+/********************** ADD SESSION ****************/
+
+.add-session-wrapper {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.add-session-card {
+    background: #FBF8F1;
+    border: 2px solid #D6BC8A;
+    border-radius: 18px;
+    padding: 24px;
+
+    box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+}
+
+.form-section {
+    margin-bottom: 24px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.section-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    font-family: 'Spectral', serif;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+}
+
+.checkbox-card {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    background: #E6D1A3;
+    border-radius: 12px;
+    padding: 8px 10px;
+    cursor: pointer;
+
+    font-size: 0.9rem;
+}
+
+.checkbox-card input {
+    accent-color: #2F6B3B;
+}
+
+.checkbox-grid.winners .checkbox-card {
+    background: #D6BC8A;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
 }

@@ -4,46 +4,222 @@
 {% endblock %}
 
 {% block body %}
-<h1>Players</h1>
 
-<form method="get" action="/players" class="mb-3">
-    <label for="order">Sort by ranking:</label>
-    <select name="order" id="order">
-        <option value="desc" {% if selected_order == "desc" %}selected{% endif %}>
-            Highest → Lowest
-        </option>
-        <option value="asc" {% if selected_order == "asc" %}selected{% endif %}>
-            Lowest → Highest
-        </option>
-    </select>
-    <button type="submit">Sort</button>
-</form>
+<div class="players-header mb-4">
 
-<table class="table table-striped table-hover table-bordered align-middle">
-    <tr>
-        <th>Nickname</th>
-        <th>Games played</th>
-        <th>Wins</th>
-        <th>Ranking</th>
-        <th></th>
-        <th></th>
-    </tr>
+    <!-- Left: title -->
+    <div class="players-title">
+        <h1 class="mb-0">Players</h1>
+    </div>
+
+    <!-- Middle: sort -->
+    <form method="get" action="/players" class="players-sort">
+        <label for="order" class="mb-0">Sort by ranking</label>
+
+        <div class="players-sort-controls">
+            <select name="order" id="order" class="form-select">
+                <option value="desc" {% if selected_order == "desc" %}selected{% endif %}>
+                    Highest → Lowest
+                </option>
+                <option value="asc" {% if selected_order == "asc" %}selected{% endif %}>
+                    Lowest → Highest
+                </option>
+            </select>
+
+            <button type="submit" class="btn btn-outline-secondary">
+                Sort
+            </button>
+        </div>
+    </form>
+    <br>
+    <!-- Right: add -->
+    <div class="players-add">
+        <button
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#addPlayerModal">
+            <i class="bi bi-person-plus-fill"></i>
+            Add player
+        </button>
+    </div>
+
+</div>
+
+<div class="player-list">
 
     {% for player in players %}
-    <tr>
-        <td>{{ player.name }}</td>
-        <td>{{ player.games_played }}</td>
-        <td>{{ player.wins }}</td>
-        <td>{{ player.ranking }}</td>
-        <td><a href="/edit_player/{{ player.id }}" >Edit</a></td>
-        <td><form action="/delete_player/{{ player.id }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this player?');">
-            <button type="submit">Delete player</button>
-        </form> <!-- The onsubmit handler runs before the browser follows the href. If confirm() returns false, the deletion is cancelled. If it returns true, the browser proceeds with the delete operation.-->
-        </td>
-    </tr>
-    {% endfor %}
-</table>
 
-<br>
-<a href="/add_player">Add a new player</a>
+    <!-- PLAYER CARD -->
+    <div class="player-card">
+
+        <!-- Left: Name + ranking -->
+        <div class="player-main">
+            <div class="player-name">{{ player.name }}</div>
+            <div class="player-ranking">
+                <i class="bi bi-trophy-fill"></i>
+                {{ player.ranking }}
+            </div>
+        </div>
+
+        <!-- Middle: stats -->
+        <div class="player-stats">
+            <div>
+                <i class="bi bi-controller"></i>
+                <strong>{{ player.games_played }}</strong>
+                <span>Games</span>
+            </div>
+            <div>
+                <i class="bi bi-award-fill"></i>
+                <strong>{{ player.wins }}</strong>
+                <span>Wins</span>
+            </div>
+        </div>
+
+        <!-- Right: actions -->
+        <div class="player-actions">
+
+            <!-- EDIT BUTTON -->
+            <button
+                class="btn btn-sm btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#editPlayerModal{{ player.id }}">
+                Edit
+            </button>
+
+            <!-- DELETE -->
+            <form action="/delete_player/{{ player.id }}" method="POST"
+                  onsubmit="return confirm('Are you sure you want to delete this player?');">
+                <button type="submit" class="btn btn-sm btn-outline-danger">
+                    Delete
+                </button>
+            </form>
+
+        </div>
+    </div>
+    <!-- END PLAYER CARD -->
+
+
+    <!-- EDIT PLAYER MODAL-->
+    <div class="modal fade" id="editPlayerModal{{ player.id }}" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit player</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <form method="POST" action="/edit_player/{{ player.id }}">
+                    <div class="modal-body">
+
+                        <div class="mb-3">
+                            <label for="player_name_{{ player.id }}" class="form-label">
+                                Player name
+                            </label>
+                            <input
+                                type="text"
+                                id="player_name_{{ player.id }}"
+                                name="player_name"
+                                class="form-control"
+                                value="{{ player.name }}"
+                                required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="games_played_{{ player.id }}" class="form-label">
+                                Games played
+                            </label>
+                            <input
+                                type="number"
+                                min="0"
+                                id="games_played_{{ player.id }}"
+                                name="games_played"
+                                class="form-control"
+                                value="{{ player.games_played }}"
+                                required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="wins_{{ player.id }}" class="form-label">
+                                Wins
+                            </label>
+                            <input
+                                type="number"
+                                min="0"
+                                id="wins_{{ player.id }}"
+                                name="wins"
+                                class="form-control"
+                                value="{{ player.wins }}"
+                                required>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-outline-secondary"
+                            data-bs-dismiss="modal">
+                            Cancel
+                        </button>
+
+                        <button type="submit" class="btn btn-primary">
+                            Save changes
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+
+<!-- ADD PLAYER MODAL -->
+<div class="modal fade" id="addPlayerModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Add player</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <form method="POST" action="/add_player">
+                <div class="modal-body">
+
+                    <div class="mb-3">
+                        <label for="new_player_name" class="form-label">
+                            Player name
+                        </label>
+                        <input
+                            type="text"
+                            id="new_player_name"
+                            name="player_name"
+                            class="form-control"
+                            required>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button
+                        type="button"
+                        class="btn btn-outline-secondary"
+                        data-bs-dismiss="modal">
+                        Cancel
+                    </button>
+
+                    <button type="submit" class="btn btn-primary">
+                        Save
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<!-- END ADD PLAYER MODAL -->
+
 {% endblock %}
