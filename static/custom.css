@@ -628,3 +628,114 @@ h1, h2, h3, .game-title, .navbar-brand {
     align-items: center;
     margin-top: 30px;
 }
+
+/*********************** HOME PAGE + CAROUSEL *********************/
+
+.home-carousel {
+    margin-bottom: 40px;
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 14px 30px rgba(0,0,0,0.25);
+}
+
+.home-carousel img {
+    height: 420px;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Dark gradient overlay for readability */
+.home-carousel::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.15),
+        rgba(0,0,0,0.35)
+    );
+    pointer-events: none;
+}
+
+/* HERO */
+
+.home-hero {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.home-title {
+    font-family: 'Spectral', serif;
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.home-subtitle {
+    font-size: 1.1rem;
+    color: #3F3F3F;
+}
+
+/* ACTION CARDS */
+
+.home-actions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 40px;
+}
+
+.home-card {
+    background: #E6D1A3;
+    border-radius: 20px;
+    padding: 28px 22px;
+    text-align: center;
+
+    color: #1C1C1C;
+    text-decoration: none;
+
+    box-shadow: 0 10px 22px rgba(0,0,0,0.18);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.home-card i {
+    font-size: 2.2rem;
+    color: #2F6B3B;
+    margin-bottom: 12px;
+}
+
+.home-card h3 {
+    font-family: 'Spectral', serif;
+    margin-bottom: 8px;
+}
+
+.home-card p {
+    font-size: 0.95rem;
+}
+
+.home-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 30px rgba(0,0,0,0.22);
+}
+
+.home-info {
+    text-align: center;
+    font-size: 0.95rem;
+    color: #3F3F3F;
+}
+
+/* Responsive */
+
+@media (max-width: 992px) {
+    .home-actions {
+        grid-template-columns: 1fr;
+    }
+
+    .home-carousel img {
+        height: 300px;
+    }
+
+    .home-title {
+        font-size: 2.2rem;
+    }
+}
