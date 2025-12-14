@@ -25,9 +25,18 @@
                 <span class="badge bg-success mb-2">{{ game.genre }}</span>
 
                 <ul class="game-meta">
-                    <li><strong>BGG Rating:</strong> {{ game.rating }}</li>
-                    <li><strong>Players:</strong> {{ game.ideal_participants_range }}</li>
-                    <li><strong>Updated:</strong> {{ game.last_updated }}</li>
+                    <li>
+                        <i class="bi bi-star-fill"></i>
+                        <span>{{ game.rating }}</span>
+                    </li>
+                    <li>
+                        <i class="bi bi-people-fill"></i>
+                        <span>{{ game.ideal_participants_range }}</span>
+                    </li>
+                    <li>
+                        <i class="bi bi-calendar-event"></i>
+                        <span>{{ game.last_updated }}</span>
+                    </li>
                 </ul>
 
                 <div class="game-card-actions">

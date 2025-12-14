@@ -210,3 +210,14 @@ h1, h2, h3, .game-title, .navbar-brand {
 .page-container.wide {
     max-width: 1300px;
 }
+
+.game-meta i {
+    margin-right: 6px;
+    color: #2F6B3B;
+}
+
+.game-meta li {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}

@@ -6,6 +6,19 @@
 {% block body %}
 <h1>Players</h1>
 
+<form method="get" action="/players" class="mb-3">
+    <label for="order">Sort by ranking:</label>
+    <select name="order" id="order">
+        <option value="desc" {% if selected_order == "desc" %}selected{% endif %}>
+            Highest → Lowest
+        </option>
+        <option value="asc" {% if selected_order == "asc" %}selected{% endif %}>
+            Lowest → Highest
+        </option>
+    </select>
+    <button type="submit">Sort</button>
+</form>
+
 <table class="table table-striped table-hover table-bordered align-middle">
     <tr>
         <th>Nickname</th>
