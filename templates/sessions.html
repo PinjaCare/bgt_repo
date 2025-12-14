@@ -15,7 +15,6 @@
         <th>Duration</th>
         <th>Date</th>
         <th></th>
-        <th></th>
     </tr>
 
     {% for s in sessions %}
@@ -47,6 +46,12 @@
         </td>
 
         <td>{{ s.date_played }}</td>
+
+        <td>
+            <form action="/delete_session/{{ s.id }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this session?');">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
 
     </tr>
     {% endfor %}

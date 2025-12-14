@@ -97,8 +97,18 @@ def add_session():
     return render_template("add_session.html", games=games_list, players=players_list)
 ######################################################################################################
 # DELETING SESSION
-
-
+@session_controller.route("/delete_session/<int:id>", methods=["POST"])
+def delete_session(id):
+    connection = get_db_connection()
+    # First we delete rows from helper tables session_players and session_winners
+    connection.execute("DELETE FROM session_players WHERE session_id = ?", (id,))
+    connection.execute("DELETE FROM session_winners WHERE session_id = ?", (id,))
+    #Second we delete the row from the actual sessions table
+    connection.execute("DELETE FROM sessions WHERE id = ?", (id,))
+    connection.commit()
+    connection.close()
+    return redirect("/sessions")
+######################################################################################################
 
 
 

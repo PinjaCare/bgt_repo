@@ -7,6 +7,18 @@
     {% block head %}{% endblock %}
 </head>
 <body>
-    {% block body %}{% endblock %}
+     <!-- NAVBAR -->
+    <nav class="navbar">
+        <a href="/">Home</a>
+        <a href="/players">Players</a>
+        <a href="/games">Games</a>
+        <a href="/sessions">Sessions</a>
+        <a href="/add_session">New Session</a>
+    </nav>
+
+     <div>
+         {% block body %}{% endblock %}
+     </div>
+
 </body>
 </html>
