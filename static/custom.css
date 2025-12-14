@@ -1,0 +1,111 @@
+/* Background for whole page */
+body {
+    background-color: #F5EAD3;
+    color: #1C1C1C;
+}
+
+/* Navbar styling */
+.navbar {
+    background-color: #8CCF9F !important;
+}
+
+.navbar .nav-link,
+.navbar .navbar-brand {
+    color: #1C1C1C !important;
+}
+
+.navbar .nav-link:hover {
+    color: #3F3F3F !important;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #2F6B3B !important;
+    border-color: #2F6B3B !important;
+}
+
+.btn-primary:hover {
+    background-color: #265c32 !important; /* slightly darker */
+    border-color: #265c32 !important;
+}
+
+/* Cards or table backgrounds*/
+.table {
+    background-color: #ffffffc7; /* soft white with slight transparency */
+}
+
+.navbar {
+    background-color: #8CCF9F !important;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: #1C1C1C !important;
+}
+
+.navbar-nav .nav-link {
+    color: #1C1C1C !important;
+    font-size: 1.1rem;
+    margin-left: 1rem;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #2F6B3B !important;
+}
+
+/* 3D-style navbar buttons */
+.nav-btn {
+    background: #8CCF9F;
+    color: #1C1C1C !important;
+    padding: 8px 18px;
+    border-radius: 30px;               /* pill shape */
+    border: 1px solid #2F6B3B;
+    box-sizing: border-box;
+
+    margin-left: 10px;
+    box-shadow: 0px 4px 0px #2F6B3B;    /* stronger 3D shadow */
+    text-decoration: none;
+    transition: all 0.15s ease-in-out;
+    font-weight: 500;
+}
+
+/* Hover effect */
+.nav-btn:hover {
+    background: #7BC98F;
+    box-shadow: 0px 3px 0px #265c32;
+    transform: translateY(1px);
+}
+
+/* Active (clicked) effect */
+.nav-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0px 1px 0px #1f4f28;
+}
+
+/* Selected page (B: active page highlight) */
+.nav-btn.active {
+    background: #6FB786;               /* darker green */
+    box-shadow: 0px 2px 0px #265c32;    /* slightly pressed */
+    transform: translateY(2px);
+    font-weight: 600;
+}
+
+/* Keskittää kaiken sisällön sivun keskelle */
+.page-container {
+    max-width: 900px;      /* leveys */
+    margin: 40px auto;     /* keskitys */
+    padding: 20px;
+}
+
+/* Taulukon ulkoasun hienosäätö */
+.table {
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table thead {
+    background-color: #8CCF9F !important;      /* vihreä yläotsikko */
+    color: #1C1C1C;
+    font-size: 1.1rem;
+}
