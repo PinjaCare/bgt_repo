@@ -5,8 +5,88 @@
 {% endblock %}
 
 {% block body %}
-<h1>Welcome to track your board games!</h1>
-<p>Track your board game sessions, players, victories and statistics.</p>
 
+<!-- SLIDESHOW / HERO -->
+<div id="homeCarousel" class="carousel slide home-carousel" data-bs-ride="carousel">
+
+    <div class="carousel-inner">
+
+        <div class="carousel-item active">
+            <img
+                src="{{ url_for('static', filename='slides/slide1.jpg') }}"
+                class="d-block w-100"
+                alt="Board game night">
+        </div>
+
+        <div class="carousel-item">
+            <img
+                src="{{ url_for('static', filename='slides/slide2.jpg') }}"
+                class="d-block w-100"
+                alt="Playing board games">
+        </div>
+
+        <div class="carousel-item">
+            <img
+                src="{{ url_for('static', filename='slides/slide3.jpg') }}"
+                class="d-block w-100"
+                alt="Tabletop games">
+        </div>
+
+    </div>
+
+    <button class="carousel-control-prev" type="button"
+            data-bs-target="#homeCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+
+    <button class="carousel-control-next" type="button"
+            data-bs-target="#homeCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+
+</div>
+
+<!-- HERO TEXT -->
+<div class="home-hero">
+
+    <h1 class="home-title">
+        Board Game Tracker
+    </h1>
+
+    <p class="home-subtitle">
+        Keep track of your board game nights, players and victories —
+        all in one place.
+    </p>
+
+</div>
+
+<!-- QUICK ACTIONS -->
+<div class="home-actions">
+
+    <a href="/games" class="home-card">
+        <i class="bi bi-dice-5-fill"></i>
+        <h3>Games</h3>
+        <p>Manage your game collection and details.</p>
+    </a>
+
+    <a href="/players" class="home-card">
+        <i class="bi bi-people-fill"></i>
+        <h3>Players</h3>
+        <p>Track players, wins and rankings.</p>
+    </a>
+
+    <a href="/sessions" class="home-card">
+        <i class="bi bi-calendar-event-fill"></i>
+        <h3>Sessions</h3>
+        <p>Log game nights and memorable victories.</p>
+    </a>
+
+</div>
+
+<div class="home-info">
+    <p>
+        Turn casual board game nights into a lasting game history.
+    </p>
+</div>
 
 {% endblock %}
