@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>Sessions</title>
+{% endblock %}
+
+{% block body %}
+<h1>Game sessions</h1>
+
+<table>
+    <tr>
+        <th>Game</th>
+        <th>Participants</th>
+        <th>Winner(s)</th>
+        <th>Duration</th>
+        <th>Date</th>
+        <th></th>
+        <th></th>
+    </tr>
+
+    {% for s in sessions %}
+    <tr>
+        <td>{{ s.game_name }}</td>
+
+        <td>
+            {% if s.participants %} <!-- Checks if participants list is empty or not, that is, returns true when not and false when is -->
+                {{ ", ".join(s.participants) }} <!-- if returned true: lists participants separated by commas -->
+            {% else %}
+                -
+            {% endif %}
+        </td>
+
+        <td>
+            {% if s.winners %}
+                {{ ", ".join(s.winners) }}
+            {% else %}
+                -
+            {% endif %}
+        </td>
+
+        <td>
+            {% if s.duration_minutes %}
+                {{ s.duration_minutes }} min
+            {% else %}
+                -
+            {% endif %}
+        </td>
+
+        <td>{{ s.date_played }}</td>
+
+    </tr>
+    {% endfor %}
+
+</table>
+<a href="/add_session">Add new session</a>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block head %}
+<title>Add session</title>
+{% endblock %}
+
+{% block body %}
+
+<form method="POST">
+
+    <label for="game_id">Game</label><br>
+    <select id="game_id" name="game_id" required>
+        {% for g in games %}
+            <option value="{{ g.id }}">{{ g.name }}</option>
+        {% endfor %}
+    </select>
+    <br><br>
+    <label>Participants</label><br>
+    {% for p in players %}
+        <input type="checkbox" name="participants" value="{{ p.id }}">
+        {{ p.name }}
+    {% endfor %}
+    <br><br>
+    <label>Winners</label><br>
+    {% for p in players %}
+        <input type="checkbox" name="winners" value="{{ p.id }}">
+        {{ p.name }}
+    {% endfor %}
+    <br><br>
+    <label for="duration_minutes">Duration (minutes)</label><br>
+    <input type="number" min="1" id="duration_minutes" name="duration_minutes" required>
+    <br><br>
+    <label for="date_played">Date</label><br>
+    <input type="date" id="date_played" name="date_played" required>
+    <br><br>
+    <button type="submit">Save</button>
+
+</form>
+<a href="/sessions">Cancel</a>
+{% endblock %}
