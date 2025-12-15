@@ -10,7 +10,7 @@ session_controller = Blueprint("session_controller", __name__)
 def get_sessions():
     connection = get_db_connection()
 
-    player_id = request.args.get("player_id")
+    player_id = request.args.get("player_id") # URL Queryn parameters
 
     # Fetch sessions (filtered or not)
     if player_id:
@@ -76,22 +76,23 @@ def get_sessions():
 # ADDING SESSION
 @session_controller.route("/add_session", methods=["GET", "POST"]) # /add_session is the HTTP route which accepts only GET and POST methods
 def add_session():
-    connection = get_db_connection() #
+    connection = get_db_connection() # Database connection
 
-    if request.method == "POST":
+    if request.method == "POST": # User submits a form
+        # Reading data from the form
         game_id = request.form["game_id"]
         duration = request.form["duration_minutes"]
         date_played = request.form["date_played"]
-        participants = request.form.getlist("participants")
-        winners = request.form.getlist("winners")
+        participants = request.form.getlist("participants") # Data as list, comes from checkbox
+        winners = request.form.getlist("winners") # Data as list, comes from checkbox
 
-        # Fetch game name for historical storage
+        # Fetching game name from games table for historical storage
         game = connection.execute(
-            "SELECT name FROM games WHERE id = ?",
+            "SELECT name FROM games WHERE id = ?", # ? and tuples prevent SQL injection
             (game_id,)
-        ).fetchone()
+        ).fetchone() # Returns single row
 
-        # Insert session with game_name stored
+        # Inserts session with game_name stored
         cursor = connection.execute("""
             INSERT INTO sessions (game_id, game_name, duration_minutes, date_played)
             VALUES (?, ?, ?, ?)
@@ -99,26 +100,26 @@ def add_session():
 
         new_session_id = cursor.lastrowid
 
-        # Insert participants + increment games_played
+        # Inserts participants
         for player_id in participants:
             connection.execute("""
                 INSERT INTO session_players (session_id, player_id)
                 VALUES (?, ?)
             """, (new_session_id, player_id))
-
+            # Increments games_played
             connection.execute("""
                 UPDATE players
                 SET games_played = games_played + 1
                 WHERE id = ?
             """, (player_id,))
 
-        # Insert winners + increment wins
+        # Inserts winners
         for winner_id in winners:
             connection.execute("""
                 INSERT INTO session_winners (session_id, player_id)
                 VALUES (?, ?)
             """, (new_session_id, winner_id))
-
+            # Increments wins
             connection.execute("""
                 UPDATE players
                 SET wins = wins + 1
@@ -129,11 +130,12 @@ def add_session():
         connection.close()
         return redirect("/sessions")
 
-    # GET request
-    games_list = connection.execute("SELECT * FROM games").fetchall()
-    players_list = connection.execute("SELECT * FROM players").fetchall()
+    # GET request. User request to see the form.
+    games_list = connection.execute("SELECT * FROM games").fetchall() # Games for dropdown selection
+    players_list = connection.execute("SELECT * FROM players").fetchall() # Players for checkboxes 'participants' and 'winners'
     connection.close()
 
+    # Shows form to the user. games and players are sent to HTML template for Jinja2 to use
     return render_template(
         "add_session.html",
         games=games_list,
@@ -160,17 +162,17 @@ def delete_session(id):
         WHERE session_id = ?
     """, (id,)).fetchall()
 
-    # Rollback stats
+    # Rollback stats if player doesn't have 0 games played
     for row in participants:
         connection.execute("""
             UPDATE players
-            SET games_played = CASE
+            SET games_played = CASE  
                 WHEN games_played > 0 THEN games_played - 1
                 ELSE 0
             END
             WHERE id = ?
         """, (row["player_id"],))
-
+    # Rollback stats if player doesn't have 0 wins.
     for row in winners:
         connection.execute("""
             UPDATE players
@@ -181,13 +183,13 @@ def delete_session(id):
             WHERE id = ?
         """, (row["player_id"],))
 
-    # Delete helper tables
+    # Deletes row/rows from helper tables
     connection.execute("DELETE FROM session_players WHERE session_id = ?", (id,))
     connection.execute("DELETE FROM session_winners WHERE session_id = ?", (id,))
 
-    # Delete session
+    # Deletes session
     connection.execute("DELETE FROM sessions WHERE id = ?", (id,))
 
-    connection.commit()
-    connection.close()
+    connection.commit() # Saves changes
+    connection.close() # Closes connection to db
     return redirect("/sessions")
