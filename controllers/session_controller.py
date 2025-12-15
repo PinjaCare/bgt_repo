@@ -5,7 +5,7 @@ from models.session import Session
 session_controller = Blueprint("session_controller", __name__)
 
 ###########################################################################################
-# LISTING SESSIONS (with optional player filter)
+# LISTING SESSIONS
 @session_controller.route("/sessions")
 def get_sessions():
     connection = get_db_connection()
@@ -74,9 +74,9 @@ def get_sessions():
 
 ###########################################################################################
 # ADDING SESSION
-@session_controller.route("/add_session", methods=["GET", "POST"])
+@session_controller.route("/add_session", methods=["GET", "POST"]) # /add_session is the HTTP route which accepts only GET and POST methods
 def add_session():
-    connection = get_db_connection()
+    connection = get_db_connection() #
 
     if request.method == "POST":
         game_id = request.form["game_id"]
